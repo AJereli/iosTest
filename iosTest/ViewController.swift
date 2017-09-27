@@ -7,22 +7,30 @@
 //
 
 import UIKit
-
-class ViewController: UIViewController {
+import WebKit
+class ViewController: UIViewController, WKUIDelegate {
+    var webView: WKWebView!
 
     @IBOutlet weak var testTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        
-        // Do any additional setup after loading the view, typically from a nib.
+        let myURL = URL(string: "https://www.apple.com")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
     }
-
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     @IBAction func textFieldTDTest(_ sender: Any) {
         (sender as! UITextField).text?.append("t");
         
