@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE573CC81F7A602500D809E7 /* ItemsUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573CC71F7A602500D809E7 /* ItemsUITableViewController.swift */; };
-		CE573CCA1F7A618900D809E7 /* var .swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573CC91F7A618900D809E7 /* var .swift */; };
+		CE573CCA1F7A618900D809E7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573CC91F7A618900D809E7 /* Item.swift */; };
 		CE6CD6041F792A6300B5150C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CD6031F792A6300B5150C /* AppDelegate.swift */; };
-		CE6CD6061F792A6300B5150C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CD6051F792A6300B5150C /* ViewController.swift */; };
+		CE6CD6061F792A6300B5150C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CD6051F792A6300B5150C /* PageViewController.swift */; };
 		CE6CD6091F792A6300B5150C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6CD6071F792A6300B5150C /* Main.storyboard */; };
 		CE6CD60B1F792A6300B5150C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6CD60A1F792A6300B5150C /* Assets.xcassets */; };
 		CE6CD60E1F792A6300B5150C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6CD60C1F792A6300B5150C /* LaunchScreen.storyboard */; };
@@ -38,10 +38,10 @@
 
 /* Begin PBXFileReference section */
 		CE573CC71F7A602500D809E7 /* ItemsUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsUITableViewController.swift; sourceTree = "<group>"; };
-		CE573CC91F7A618900D809E7 /* var .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "var .swift"; sourceTree = "<group>"; };
+		CE573CC91F7A618900D809E7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		CE6CD6001F792A6300B5150C /* iosTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6CD6031F792A6300B5150C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE6CD6051F792A6300B5150C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE6CD6051F792A6300B5150C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		CE6CD6081F792A6300B5150C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE6CD60A1F792A6300B5150C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE6CD60D1F792A6300B5150C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,10 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				CE6CD6031F792A6300B5150C /* AppDelegate.swift */,
-				CE6CD6051F792A6300B5150C /* ViewController.swift */,
+				CE6CD6051F792A6300B5150C /* PageViewController.swift */,
 				CE6CD6071F792A6300B5150C /* Main.storyboard */,
 				CE573CC71F7A602500D809E7 /* ItemsUITableViewController.swift */,
-				CE573CC91F7A618900D809E7 /* var .swift */,
+				CE573CC91F7A618900D809E7 /* Item.swift */,
 				CEED0A471F7954300021B678 /* ItemTableViewCell.swift */,
 				CE6CD60A1F792A6300B5150C /* Assets.xcassets */,
 				CE6CD60C1F792A6300B5150C /* LaunchScreen.storyboard */,
@@ -268,10 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE573CCA1F7A618900D809E7 /* var .swift in Sources */,
+				CE573CCA1F7A618900D809E7 /* Item.swift in Sources */,
 				CE573CC81F7A602500D809E7 /* ItemsUITableViewController.swift in Sources */,
 				CEED0A481F7954300021B678 /* ItemTableViewCell.swift in Sources */,
-				CE6CD6061F792A6300B5150C /* ViewController.swift in Sources */,
+				CE6CD6061F792A6300B5150C /* PageViewController.swift in Sources */,
 				CE6CD6041F792A6300B5150C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

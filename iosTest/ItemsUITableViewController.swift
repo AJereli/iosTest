@@ -10,7 +10,7 @@ import UIKit
 
 class ItemsUITableViewController: UITableViewController {
 
-    var items = [Item]();
+    var items = [Item]()
 
    
     override func didReceiveMemoryWarning() {
@@ -20,8 +20,21 @@ class ItemsUITableViewController: UITableViewController {
     
     //MARK: - Table view data source
   
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        items += getItems(cnt:10)
+        
+     
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
     
     
+ 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Table view cells are reused and should be dequeued using a cell identifier.
@@ -31,63 +44,64 @@ class ItemsUITableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
         
-        // Fetches the appropriate meal for the data source layout.
-        let item = items[indexPath.row]
         
-        cell.titleLabel.text = item.title;
-        cell.descritpionTextView.text =  item.description;
-        //cell.newsImageView.image = item.image;
+        let item = items[indexPath.row]
+       
+        cell.titleLabel.text = item.title
+        cell.descritpionTextView.text =  item.description
+        //cell.newsImageView.image = item.image
         return cell
     }
    
     
 
     private func getItems(cnt:Int = 2) -> [Item]{
-        var newItems = [Item]();
+        var newItems = [Item]()
         
         for _ in 0..<cnt{
-            let title:String = "TitleSemple";
-            let img = UIImage(named:"ImageSample");
-            let description:String = "Some description";
-            guard let item:Item = Item(title: title, image: img, description: description) else {
-                fatalError("Unable to instantiate meal2");
+            let title:String = "TitleSemple"
+            let img = UIImage(named:"ImageSample")
+            let description:String = "Some description"
+            let siteUrl:String = "https://stackoverflow.com"
+            guard let item:Item = Item(title: title, image: img, description: description, newsUrl: siteUrl) else {
+                fatalError("Unable to instantiate meal2")
             }
             
-            newItems.append(item);
+            newItems.append(item)
         }
         
-        return newItems;
+        return newItems
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        items += getItems(cnt:10);
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
+    
     
   
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1;
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count;
+        return items.count
     }
 
     
-   
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currUrl:String = items[indexPath.row].newsUrl
+        performSegue(withIdentifier: "segueUrl", sender: currUrl)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     
+        if segue.identifier == "segueUrl"{
+            if let controller = segue.destination as? PageViewController {
+                controller.siteUrl = (sender as! String)
+            }
+
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -124,14 +138,11 @@ class ItemsUITableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
 
 }

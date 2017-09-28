@@ -8,14 +8,17 @@
 
 import UIKit
 import WebKit
-class ViewController: UIViewController, WKUIDelegate {
+class PageViewController: UIViewController, WKUIDelegate {
     var webView: WKWebView!
-
+    
+    public var siteUrl:String = "https://www.apple.com"
+    
+    
     @IBOutlet weak var testTextField: UITextField!
     override func viewDidLoad() {
-        super.viewDidLoad();
+        super.viewDidLoad()
         
-        let myURL = URL(string: "https://www.apple.com")
+        let myURL = URL(string: siteUrl)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
@@ -32,9 +35,11 @@ class ViewController: UIViewController, WKUIDelegate {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func textFieldTDTest(_ sender: Any) {
-        (sender as! UITextField).text?.append("t");
+        (sender as! UITextField).text?.append("t")
         
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+    }
 }
 

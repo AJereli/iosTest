@@ -14,6 +14,9 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var descritpionTextView: UITextView!
     @IBOutlet weak var newsImageView: UIImageView!
     
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

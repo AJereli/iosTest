@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +32,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5aO-Sj-cvf">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Text" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aO-Sj-cvf">
                                             <rect key="frame" x="106" y="8" width="252" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +48,6 @@
                                 <connections>
                                     <outlet property="descritpionTextView" destination="5aO-Sj-cvf" id="9t3-0Q-XQg"/>
                                     <outlet property="titleLabel" destination="0cv-Iv-SRk" id="UmC-mn-JIg"/>
-                                    <segue destination="BYZ-38-t0r" kind="push" id="9Yu-hr-oWd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -60,15 +58,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="T5s-lH-woj"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueUrl" id="se2-qs-e8H"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kh8-hh-oMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="311" y="107"/>
         </scene>
-        <!--View Controller-->
+        <!--Page View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ItemViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="iosTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemViewController" id="BYZ-38-t0r" customClass="PageViewController" customModule="iosTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
