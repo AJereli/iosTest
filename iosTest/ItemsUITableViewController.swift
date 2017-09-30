@@ -33,7 +33,9 @@ class ItemsUITableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    
+    @IBAction func selectMenuEvent(_ sender: Any) {
+        performSegue(withIdentifier: "segueMenu", sender: sender)
+    }
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -41,7 +43,7 @@ class ItemsUITableViewController: UITableViewController {
         let cellIdentifier = "ItemTableViewCell"
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ItemTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+            fatalError("The dequeued cell is not an instance of ItemTableViewCell.")
         }
         
         
@@ -54,7 +56,7 @@ class ItemsUITableViewController: UITableViewController {
     }
    
     
-
+    
     private func getItems(cnt:Int = 2) -> [Item]{
         var newItems = [Item]()
         
@@ -86,8 +88,7 @@ class ItemsUITableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
-
-    
+  
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currUrl:String = items[indexPath.row].newsUrl
@@ -100,6 +101,11 @@ class ItemsUITableViewController: UITableViewController {
                 controller.siteUrl = (sender as! String)
             }
 
+        }
+        if segue.identifier == "segueMenu"{
+            print("SEGUE MENU")
+            segue.destination as? ManuUIViewController
+              
         }
     }
 
