@@ -62,8 +62,8 @@ class ItemsUITableViewController: UITableViewController {
         
         for _ in 0..<cnt{
             let title:String = "TitleSemple"
-            let img = UIImage(named:"ImageSample")
-            let description:String = "Some description"
+            let img = UIImage(named:"animeCat")
+            let description:String = "Some description Some description Some description"
             let siteUrl:String = "https://stackoverflow.com"
             guard let item:Item = Item(title: title, image: img, description: description, newsUrl: siteUrl) else {
                 fatalError("Unable to instantiate meal2")
@@ -104,8 +104,7 @@ class ItemsUITableViewController: UITableViewController {
         }
         if segue.identifier == "segueMenu"{
             print("SEGUE MENU")
-            segue.destination as? ManuUIViewController
-              
+          
         }
     }
 

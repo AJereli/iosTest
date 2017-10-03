@@ -19,6 +19,8 @@
 		CE6CD60E1F792A6300B5150C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6CD60C1F792A6300B5150C /* LaunchScreen.storyboard */; };
 		CE6CD6191F792A6300B5150C /* iosTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CD6181F792A6300B5150C /* iosTestTests.swift */; };
 		CE6CD6241F792A6300B5150C /* iosTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CD6231F792A6300B5150C /* iosTestUITests.swift */; };
+		CE813F361F830534004B0694 /* Autorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE813F351F830534004B0694 /* Autorization.swift */; };
+		CE813F3E1F831246004B0694 /* AutorizationUIViwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE813F3D1F831246004B0694 /* AutorizationUIViwController.swift */; };
 		CEED0A481F7954300021B678 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED0A471F7954300021B678 /* ItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,10 @@
 		CE6CD61F1F792A6300B5150C /* iosTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6CD6231F792A6300B5150C /* iosTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTestUITests.swift; sourceTree = "<group>"; };
 		CE6CD6251F792A6300B5150C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE813F351F830534004B0694 /* Autorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autorization.swift; sourceTree = "<group>"; };
+		CE813F381F830E55004B0694 /* iosTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		CE813F3C1F830F70004B0694 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		CE813F3D1F831246004B0694 /* AutorizationUIViwController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorizationUIViwController.swift; sourceTree = "<group>"; };
 		CEED0A471F7954300021B678 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,10 +95,12 @@
 		CE6CD5F71F792A6200B5150C = {
 			isa = PBXGroup;
 			children = (
+				CE813F3C1F830F70004B0694 /* BridgingHeader.h */,
 				CE6CD6021F792A6300B5150C /* iosTest */,
 				CE6CD6171F792A6300B5150C /* iosTestTests */,
 				CE6CD6221F792A6300B5150C /* iosTestUITests */,
 				CE6CD6011F792A6300B5150C /* Products */,
+				CE813F381F830E55004B0694 /* iosTest-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,7 +120,9 @@
 				CE6CD6031F792A6300B5150C /* AppDelegate.swift */,
 				CE6CD6051F792A6300B5150C /* PageViewController.swift */,
 				CE6CD6071F792A6300B5150C /* Main.storyboard */,
+				CE813F351F830534004B0694 /* Autorization.swift */,
 				CE2CAE561F7EED6600902C5C /* ManuUIViewController.swift */,
+				CE813F3D1F831246004B0694 /* AutorizationUIViwController.swift */,
 				CE2CAE5C1F7F173000902C5C /* Sources.swift */,
 				CE573CC71F7A602500D809E7 /* ItemsUITableViewController.swift */,
 				CE573CC91F7A618900D809E7 /* Item.swift */,
@@ -211,6 +221,7 @@
 				TargetAttributes = {
 					CE6CD5FF1F792A6300B5150C = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					CE6CD6131F792A6300B5150C = {
@@ -280,7 +291,9 @@
 				CE573CCA1F7A618900D809E7 /* Item.swift in Sources */,
 				CE573CC81F7A602500D809E7 /* ItemsUITableViewController.swift in Sources */,
 				CE2CAE591F7EF5C900902C5C /* MenuViewCell.swift in Sources */,
+				CE813F3E1F831246004B0694 /* AutorizationUIViwController.swift in Sources */,
 				CEED0A481F7954300021B678 /* ItemTableViewCell.swift in Sources */,
+				CE813F361F830534004B0694 /* Autorization.swift in Sources */,
 				CE2CAE5D1F7F173000902C5C /* Sources.swift in Sources */,
 				CE2CAE571F7EED6600902C5C /* ManuUIViewController.swift in Sources */,
 				CE6CD6061F792A6300B5150C /* PageViewController.swift in Sources */,
@@ -450,12 +463,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CryptoHeaders = "#import <CommonCrypto/CommonDigest.h>\n#import <CommonCrypto/CommonCryptor.h>\n#import <CommonCrypto/CommonKeyDerivation.h>";
 				INFOPLIST_FILE = iosTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Me.iosTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -465,12 +482,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CryptoHeaders = "#import <CommonCrypto/CommonDigest.h>\n#import <CommonCrypto/CommonCryptor.h>\n#import <CommonCrypto/CommonKeyDerivation.h>";
 				INFOPLIST_FILE = iosTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Me.iosTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

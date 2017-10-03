@@ -26,7 +26,7 @@ class Sources {
         sourcesArray = loadAllSources();
     }
     
-    static private var sources!
+    static private var sources:Sources!
     
     static func getSources () -> Sources{
         if (sources == nil){
@@ -39,7 +39,7 @@ class Sources {
         return sourcesArray[index]
     }
     
-    func count () -> Int{
+    func sourceCount () -> Int{
         return sourcesArray.count
     }
     

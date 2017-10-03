@@ -23,11 +23,13 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Sources.getSources().count()
+        
+        return Sources.getSources().sourceCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,8 +38,8 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MenuViewCell  else {
             fatalError("The dequeued cell is not an instance of MenuTableViewCell.")
         }
-        
         let menuItem = Sources.getSources().getSource(index:indexPath.row)
+
         
         cell.menuItemLabel.text = menuItem.sourceName
         cell.menuItemSwitch.isSelected = menuItem.isSelected
