@@ -112,6 +112,9 @@
                                 <rect key="frame" x="205" y="255" width="89" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="clickLoginButton:" destination="1lK-mO-Mdk" eventType="touchUpInside" id="pTM-UC-uAQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lbh-Nu-pts">
                                 <rect key="frame" x="81" y="255" width="89" height="38"/>

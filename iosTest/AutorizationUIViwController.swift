@@ -18,7 +18,19 @@ class AutorizationUIViwController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-
+    @IBAction func clickLoginButton(_ sender: Any) {
+        let login:String = loginTextField.text!
+        let password:String = passwordTextField.text!
+        if login.count > 3 && password.count > 3 {
+            let user:User = User (login: login, password: password)
+            user.autorization()
+        }
+        else {
+            infoLabel.text = "Login or password too short"
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
