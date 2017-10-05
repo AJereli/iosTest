@@ -21,7 +21,8 @@ extension String {
             do {
                 try json = JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
             }
-            catch _ {
+            catch  {
+                
                 return json
             }
             return json
@@ -76,38 +77,56 @@ class User {
     }
     
     private func writeTextToFile(fileName:String, text:String){
-        
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
-            let path = dir.appendingPathComponent(fileName)
-            
-            //writing
-            do {
-                try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-            }
-            catch {
-                print("error with file Z")
-            }
-            
+        let folder = "Users"
+       
+        guard let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { return }
+        guard let writePath = NSURL(fileURLWithPath: path).appendingPathComponent(folder) else { return }
+        try? FileManager.default.createDirectory(atPath: writePath.path, withIntermediateDirectories: true)
+        let file = writePath.appendingPathComponent(fileName + ".txt")
+        do {
            
-          
+            try text.write(to: file, atomically: false, encoding: String.Encoding.utf8)
         }
-    }
+        catch {
+            print("error with file")
+            
+        }
+        do {
+            let text2 = try String(contentsOf: file, encoding: .utf8)
+            print("FROM FILE: \(text2)")
+
+        }
+        catch {
+        }
+   }
     
     
-    func autorization(){
+    func autorization() -> Bool{
+        let jsonData:Any?
+        jsonData =  WorkWithFile(folder: "Users", fileName: "user\(login)").readTextFromFile()!.parseJSONString
+        
+        
+        let parsedJsonData = jsonData as! [String: Any]
+        if (password.sha256() == parsedJsonData["password"] as! String){
+            print("Autorization done")
+            return true
+        }else{
+            return false
+        }
         
     }
     func registration(){
+        print("---REGISTRATION START---")
         
         let stringJson:String = """
-        {
-            login: \(login),
-            password: \(password.sha256()),
-            sources: \([])
+        {"login": "\(login)", "password": "\(password.sha256())"
         }
         """
-        writeTextToFile(fileName: "usersJson", text: stringJson+"\n")
+      
+        //writeTextToFile(fileName: "user\(login).txt", text: stringJson+"\n")
+      
+        WorkWithFile(folder: "Users", fileName: "user\(login)").writeTextToFile(text: stringJson)
+        
         
         let jsonData = stringJson.parseJSONString
         if jsonData == nil{
@@ -116,50 +135,9 @@ class User {
             print("jsonData valid")
         }
         let tmp = jsonData as! [String: Any]
-        print(tmp["login"])
-//        do {
-//            if let data = jsonData,
-//                let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-//                let user = json["user"] as? [String: Any] {
-//
-//                if let login = user["login"] as? String {
-//                    print(login)
-//                }
-//            }
-//        } catch {
-//            print("Error deserializing JSON: \(error)")
-//        }
-        
-//
-//
-//        for (k, v) in json{
-//            print(k + (v as! String))
-//        }
-        
-        //        if let myData = json as! Data{
-//            do{
-//                let myJson = try JSONSerialization.jsonObject(with: myData, options: JSONSerialization.ReadingOptions.mutableContainers) as Any
-//                if let data = myJson["login"] as String? {
-//                   print(login)
-//                }
-//            }
-//
-//            catch{
-//
-//            }
-//        }
-//        print("Parsed JSON: \(json!)")
-//        if let data = try? JSONSerialization.data(withJSONObject: userJsonObject),
-//            let string = String(data: data, encoding: .utf8){
-//            print(string)
-//        }
-//        let userJsonObject: [String: Any] = [
-//            "login": login,
-//            "password": password.sha256(),
-//            "sources": []
-//
-//        ]
-        
+       
+      
+        print("---REGISTRATION END---")
     }
     var name:String = ""
     var sources:[Source] = []

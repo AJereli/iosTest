@@ -23,7 +23,13 @@ class AutorizationUIViwController: UIViewController {
         let password:String = passwordTextField.text!
         if login.count > 3 && password.count > 3 {
             let user:User = User (login: login, password: password)
-            user.autorization()
+            if user.autorization(){
+                let itemsViewController = ItemsUITableViewController()
+                self.navigationController?.pushViewController(itemsViewController, animated: true)
+                
+            }else{
+                infoLabel.text = "Wrong login or pass"
+            }
         }
         else {
             infoLabel.text = "Login or password too short"
