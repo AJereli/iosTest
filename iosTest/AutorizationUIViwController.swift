@@ -22,11 +22,16 @@ class AutorizationUIViwController: UIViewController {
         let login:String = loginTextField.text!
         let password:String = passwordTextField.text!
         if login.count > 3 && password.count > 3 {
-            let user:User = User (login: login, password: password)
-            if user.autorization(){
-                let itemsViewController = ItemsUITableViewController()
-                self.navigationController?.pushViewController(itemsViewController, animated: true)
-                
+            
+            let autorization:Autorization = Autorization (login: login, password: password)
+            let sources:[String]? = autorization.autorization()
+            
+            if sources != nil{
+                Sources.getSources().setAllSelections(sourcesLinks: sources!)
+                Sources.getSources().userName = login
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController") as! UINavigationController
+                UIApplication.shared.keyWindow?.rootViewController = viewController
             }else{
                 infoLabel.text = "Wrong login or pass"
             }
@@ -47,7 +52,7 @@ class AutorizationUIViwController: UIViewController {
         let login:String = loginTextField.text!
         let password:String = passwordTextField.text!
         if login.count > 3 && password.count > 3 {
-            let user:User = User (login: login, password: password)
+            let user:Autorization = Autorization (login: login, password: password)
             user.registration()
         }
         else {

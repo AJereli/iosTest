@@ -21,6 +21,7 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -29,7 +30,7 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Sources.getSources().sourceCount()
+        return Sources.getSources().allSourceCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,14 +42,14 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let menuItem = Sources.getSources().getSource(index:indexPath.row)
 
         
-        cell.menuItemLabel.text = menuItem.sourceName
-        cell.menuItemSwitch.isSelected = menuItem.isSelected
+        cell.menuItemLabel.text = menuItem.sourceLink
+        cell.menuItemSwitch.isOn = menuItem.isSelected
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+       print("select \(indexPath.row)")
     }
     /*
     // MARK: - Navigation

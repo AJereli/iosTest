@@ -13,7 +13,7 @@
         <!--Items-->
         <scene sceneID="YDr-XB-0UV">
             <objects>
-                <tableViewController storyboardIdentifier="ItemsUITableViewController" id="W7Y-M1-lpX" customClass="ItemsUITableViewController" customModule="iosTest" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="itemsUITableViewController" id="W7Y-M1-lpX" customClass="ItemsUITableViewController" customModule="iosTest" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q21-tO-iuF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,7 +89,7 @@
         <!--AutorizationUI Viw Controller-->
         <scene sceneID="iOX-Rl-iv5">
             <objects>
-                <viewController storyboardIdentifier="AutorizationUIViwController" id="1lK-mO-Mdk" customClass="AutorizationUIViwController" customModule="iosTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="autorizationUIViwController" id="1lK-mO-Mdk" customClass="AutorizationUIViwController" customModule="iosTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4o7-E4-Qre">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,6 +181,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ma5-hs-KJM">
                                                     <rect key="frame" x="320" y="3" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="valueChangedEvent:" destination="3EG-Bn-LaI" eventType="valueChanged" id="4Z9-Ha-x5S"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -250,7 +253,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uhl-c7-1Ne">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="49K-VU-yV2" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" id="49K-VU-yV2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q88-Bq-f8c">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

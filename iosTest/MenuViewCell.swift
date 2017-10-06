@@ -10,6 +10,7 @@ import UIKit
 
 class MenuViewCell: UITableViewCell {
 
+    
     @IBOutlet weak var menuItemLabel: UILabel!
     @IBOutlet weak var menuItemSwitch: UISwitch!
     override func awakeFromNib() {
@@ -17,6 +18,12 @@ class MenuViewCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBAction func valueChangedEvent(_ sender: Any) {
+        let uiSwitch = sender as! UISwitch
+        
+        Sources.getSources().setSelection(sourceLink: menuItemLabel.text!, isSelected: uiSwitch.isOn)
+        //Sources.getSources().setSelection(sourceLink: <#T##String#>, isSelected: uiSwitch.isSelected)
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
