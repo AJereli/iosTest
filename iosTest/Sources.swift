@@ -26,11 +26,10 @@ class Sources {
     var allSources:[Source] = [Source]()
     var favoritsSources:[Source] = [Source]()
     
-    var userName:String
+    var user:User?
     
     private init() {
         allSources = loadAllSources()
-        
         
     }
     
@@ -49,27 +48,14 @@ class Sources {
                 source.sourceLink == s
             })?.isSelected = isSelected
         }
-        
-    }
-    
-    func setSelection (sourceLink:String, isSelected:Bool){
-        allSources.first(where:
-            { (source:Source) -> Bool in
-                source.sourceLink == sourceLink
-        })?.isSelected = isSelected
         updateFavoritsSources()
     }
     
-    
-    
-    func getSource(index:Int) -> Source{
-        return allSources[index]
+    func setSelection (sourceLink:String, isSelected:Bool){
+        setAllSelections(sourcesLinks: [sourceLink], isSelected: isSelected)
     }
     
-    func allSourceCount () -> Int{
-        return allSources.count
-    }
-    
+
     private func loadAllSources () -> [Source] {
             return [Source(sourceName: "Google", sourceLink: "https://google.com", isSelected: false), Source(sourceName: "StackOverflow", sourceLink: "https://stackoverflow.com", isSelected:false)]
     }
@@ -78,6 +64,8 @@ class Sources {
         let selected:[Source] = allSources.filter { (s:Source) -> Bool in
             s.isSelected
         }
+        favoritsSources = selected
+        
         var selectedSourceLinks:[String] = [String]()
         for sources in selected{
             selectedSourceLinks.append("\"" + sources.sourceLink + "\"")
@@ -85,10 +73,16 @@ class Sources {
         
         let  selectedJsonString = "[" + selectedSourceLinks.joined(separator: ",") + "]"
         
-        var userJsonStr = WorkWithFile(folder: "Users", fileName: "user\(userName)").readTextFromFile()!
+        let stringJson:String = """
+        {"login": "\(user!.userName)",
+        "password": "\(user!.userPassword)",
+        "sources": \(selectedJsonString)
+        }
+        """
         
-        
-        print (selectedJsonString)
+        if WorkWithFile(folder: "Users", fileName: "user" + user!.userName).writeTextToFile(text: stringJson){
+            print("(UPDATE Favors)\n String writed to file \n \(stringJson)\n")
+        }
         
     }
     

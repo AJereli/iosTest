@@ -1,4 +1,4 @@
-//
+	//
 //  ItemsUITableViewController.swift
 //  iosTest
 //
@@ -22,8 +22,8 @@ class ItemsUITableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        items += getItems(cnt:3)
+        tableView.clearsContextBeforeDrawing = true
+
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -32,6 +32,13 @@ class ItemsUITableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        items = getItems(cnt:3)
+        tableView.reloadData()
+    }
+    
     
     @IBAction func selectMenuEvent(_ sender: Any) {
         performSegue(withIdentifier: "segueMenu", sender: sender)
@@ -57,15 +64,16 @@ class ItemsUITableViewController: UITableViewController {
     
     
     
-    private func getItems(cnt:Int = 2) -> [Item]{
+    private func getItems(cnt:Int) -> [Item]{
         var newItems = [Item]()
         
-        for _ in 0..<Sources.getSources().allSourceCount(){
+        for i in 0..<Sources.getSources().favoritsSources.count{
+            
             for _ in 0..<cnt{
                 let title:String = "TitleSemple"
                 let img = UIImage(named:"animeCat")
                 let description:String = "Some description Some description Some description"
-                let siteUrl:String = "https://stackoverflow.com"
+                let siteUrl:String = Sources.getSources().favoritsSources[i].sourceLink
                 guard let item:Item = Item(title: title, image: img, description: description, newsUrl: siteUrl) else {
                     fatalError("Unable to instantiate meal2")
                 }
@@ -73,14 +81,12 @@ class ItemsUITableViewController: UITableViewController {
                 newItems.append(item)
             }
         }
+
         return newItems
     }
     
     
     
-    
-    
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -104,7 +110,6 @@ class ItemsUITableViewController: UITableViewController {
             
         }
         if segue.identifier == "segueMenu"{
-            print("SEGUE MENU")
             
         }
     }
@@ -129,12 +134,12 @@ class ItemsUITableViewController: UITableViewController {
      }
      */
     
-    /*
+    
      // Override to support rearranging the table view.
      override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
+         print("sds")
      }
-     */
+    
     
     /*
      // Override to support conditional rearranging of the table view.

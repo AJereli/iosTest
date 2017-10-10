@@ -12,10 +12,12 @@ import Foundation
 class User {
     
     let userName:String
+    let userPassword:String
     var favoriteSources:[String]
     
-    init (userName:String, favoriteSources:[String]){
+    init (userName:String, userPassword:String, favoriteSources:[String]){
         self.userName = userName
+        self.userPassword = userPassword
         self.favoriteSources = favoriteSources
     }
 }

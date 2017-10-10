@@ -21,14 +21,13 @@ class AutorizationUIViwController: UIViewController {
     @IBAction func clickLoginButton(_ sender: Any) {
         let login:String = loginTextField.text!
         let password:String = passwordTextField.text!
+        
         if login.count > 3 && password.count > 3 {
             
             let autorization:Autorization = Autorization (login: login, password: password)
-            let sources:[String]? = autorization.autorization()
             
-            if sources != nil{
-                Sources.getSources().setAllSelections(sourcesLinks: sources!)
-                Sources.getSources().userName = login
+            if autorization.autorization(){
+           
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController") as! UINavigationController
                 UIApplication.shared.keyWindow?.rootViewController = viewController

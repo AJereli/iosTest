@@ -49,16 +49,18 @@ class Autorization {
    }
     
     
-    func autorization() -> [String]?{
+    func autorization() -> Bool{
         let jsonData:Any? =  WorkWithFile(folder: "Users", fileName: "user\(login)").readTextFromFile()!.parseJSONString
-        
+
       
         let parsedJsonData = jsonData as! [String: Any]
         if (password.sha256() == parsedJsonData["password"] as! String){
             print("Autorization done")
-            return parsedJsonData["sources"] as! [String]
+            Sources.getSources().user = User(userName: login, userPassword: password.sha256(), favoriteSources: parsedJsonData["sources"] as! [String])
+            Sources.getSources().setAllSelections(sourcesLinks: parsedJsonData["sources"] as! [String])
+            return true
         }else{
-            return nil
+            return false
         }
         
     }
@@ -87,8 +89,7 @@ class Autorization {
         
         print("---REGISTRATION END---")
     }
-    var name:String = ""
-    var sources:[Source] = []
+    
     
     
     

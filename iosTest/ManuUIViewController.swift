@@ -20,8 +20,6 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -30,7 +28,7 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Sources.getSources().allSourceCount()
+        return Sources.getSources().allSources.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,7 +37,7 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MenuViewCell  else {
             fatalError("The dequeued cell is not an instance of MenuTableViewCell.")
         }
-        let menuItem = Sources.getSources().getSource(index:indexPath.row)
+        let menuItem = Sources.getSources().allSources[indexPath.row]
 
         
         cell.menuItemLabel.text = menuItem.sourceLink
@@ -48,9 +46,7 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       print("select \(indexPath.row)")
-    }
+    
     /*
     // MARK: - Navigation
 
