@@ -30,7 +30,9 @@ class Item {
         self.description = description
         self.newsUrl = newsUrl
     }
-    
+}
+
+class Items {
     
     
 }

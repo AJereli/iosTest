@@ -27,24 +27,29 @@ class WorkWithFile {
     
     func readTextFromFile () -> String?{
         let text:String?
+        if !FileManager.default.fileExists(atPath: writePath.path){
+            return nil
+        }
         do{
-            if !FileManager.default.fileExists(atPath: writePath.path) {
-                try? FileManager.default.createDirectory(atPath: writePath.path, withIntermediateDirectories: true)
-            }
-            try text = String(contentsOf: file, encoding: .utf8)
             
+            try text = String(contentsOf: file, encoding: .utf8)
+            print ("Read from file \(fileName) success with text:\n\(text!)")
         }
         catch{
             text = nil
         }
-        print ("Read from file \(fileName) success with text:\n\(text!)")
+      
 
         return text
     }
     
+    func fileExists() -> Bool{
+        return FileManager.default.fileExists(atPath: writePath.path)
+    }
+    
     func writeTextToFile(text:String) -> Bool{
         
-        if !FileManager.default.fileExists(atPath: writePath.path) {
+        if !fileExists() {
             try? FileManager.default.createDirectory(atPath: writePath.path, withIntermediateDirectories: true)
         }
         

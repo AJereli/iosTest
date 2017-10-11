@@ -7,39 +7,78 @@
 //
 
 import UIKit
+import PromiseKit
 
 class AutorizationUIViwController: UIViewController {
 
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var registrationButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    }
+    private func startItemsView (){
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController") as! UINavigationController
+        UIApplication.shared.keyWindow?.rootViewController = viewController
     }
     @IBAction func clickLoginButton(_ sender: Any) {
         let login:String = loginTextField.text!
         let password:String = passwordTextField.text!
         
         if login.count > 3 && password.count > 3 {
-            
-            let autorization:Autorization = Autorization (login: login, password: password)
-            
-            if autorization.autorization(){
            
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController") as! UINavigationController
-                UIApplication.shared.keyWindow?.rootViewController = viewController
-            }else{
-                infoLabel.text = "Wrong login or pass"
+            firstly{ () -> Promise<Bool> in
+                activityIndicator.startAnimating()
+                let autorization:Autorization = Autorization (login: login, password: password)
+                return autorization.autorization()
             }
+            .then{isAuth -> Void  in
+                if isAuth{
+                  self.startItemsView()
+                }
+                else{
+                    self.infoLabel.text = "Wrong login or pass"
+                }
+                
+                }.always {
+                    self.activityIndicator.stopAnimating()
+            }
+
         }
         else {
             infoLabel.text = "Login or password too short"
         }
     }
     
+    @IBAction func clickRegistrationButton(_ sender: Any) {
+        let login:String = loginTextField.text!
+        let password:String = passwordTextField.text!
+        
+        if login.count > 3 && password.count > 3 {
+            firstly{ () -> Promise<Bool> in
+                activityIndicator.startAnimating()
+                let user:Autorization = Autorization(login: login, password: password)
+                return user.registration()
+                }.then{res -> () in
+                    if res {
+                        self.infoLabel.text = "Registration is done"
+                        
+                    }
+            }.always {
+                    self.activityIndicator.stopAnimating()
+            }
+            
+        }
+        else {
+            infoLabel.text = "Login or password too short"
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,18 +86,7 @@ class AutorizationUIViwController: UIViewController {
     }
     
    
-    @IBAction func clickRegistrationButton(_ sender: Any) {
-        let login:String = loginTextField.text!
-        let password:String = passwordTextField.text!
-        if login.count > 3 && password.count > 3 {
-            let user:Autorization = Autorization (login: login, password: password)
-            user.registration()
-        }
-        else {
-            infoLabel.text = "Login or password too short"
-        }
-    }
-    @IBOutlet weak var registrationButton: UIButton!
+   
     
     /*
     // MARK: - Navigation
