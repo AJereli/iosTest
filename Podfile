@@ -8,6 +8,7 @@ target 'iosTest' do
 
   pod "PromiseKit", "~> 4.4"
   pod 'Alamofire', '~> 4.5'
+  pod 'AlamofireImage', '~> 3.3'
 
   target 'iosTestTests' do
     inherit! :search_paths

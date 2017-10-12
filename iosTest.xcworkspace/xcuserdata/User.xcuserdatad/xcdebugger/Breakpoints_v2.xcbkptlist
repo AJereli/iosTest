@@ -2,4 +2,70 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosTest/ItemsUITableViewController.swift"
+            timestampString = "529463971.738405"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "getItems(limit:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iosTest.ItemsUITableViewController.(getItems in _DE893D6EC94511E8A6122ABF9F12514C)(limit: Swift.Int) -&gt; Swift.Array&lt;iosTest.Item&gt;"
+                  moduleName = "iosTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/User/Documents/iosTest/iosTest/ItemsUITableViewController.swift"
+                  timestampString = "529463971.797453"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "683">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;iosTest.Item&gt;) -&gt; () in iosTest.ItemsUITableViewController.(getItems in _DE893D6EC94511E8A6122ABF9F12514C)(limit: Swift.Int) -&gt; Swift.Array&lt;iosTest.Item&gt;"
+                  moduleName = "iosTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/User/Documents/iosTest/iosTest/ItemsUITableViewController.swift"
+                  timestampString = "529463971.799963"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosTest/Sources.swift"
+            timestampString = "529463971.738519"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "loadItemsFromSource(limit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

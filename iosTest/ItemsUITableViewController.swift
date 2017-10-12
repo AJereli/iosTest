@@ -35,7 +35,7 @@ class ItemsUITableViewController: UITableViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        items = getItems(cnt:3)
+        items = getItems(limit:3)
         tableView.reloadData()
     }
     
@@ -64,22 +64,24 @@ class ItemsUITableViewController: UITableViewController {
     
     
     
-    private func getItems(cnt:Int) -> [Item]{
+    private func getItems(limit:Int) -> [Item]{
         var newItems = [Item]()
         
         for i in 0..<Sources.getSources().favoritsSources.count{
+            Sources.getSources().favoritsSources[i].loadItemsFromSource(limit: limit).then
+                { result -> Void in newItems+=result}
             
-            for _ in 0..<cnt{
-                let title:String = "TitleSemple"
-                let img = UIImage(named:"animeCat")
-                let description:String = "Some description Some description Some description"
-                let siteUrl:String = Sources.getSources().favoritsSources[i].sourceLink
-                guard let item:Item = Item(title: title, image: img, description: description, newsUrl: siteUrl) else {
-                    fatalError("Unable to instantiate meal2")
-                }
-                
-                newItems.append(item)
-            }
+//            for _ in 0..<limit{
+//                let title:String = "TitleSemple"
+//                let img = UIImage(named:"animeCat")
+//                let description:String = "Some description Some description Some description"
+//                let siteUrl:String = Sources.getSources().favoritsSources[i].sourceLink
+//                guard let item:Item = Item(title: title, image: img, description: description, newsUrl: siteUrl) else {
+//                    fatalError("Unable to instantiate meal2")
+//                }
+//                
+//                newItems.append(item)
+//            }
         }
 
         return newItems

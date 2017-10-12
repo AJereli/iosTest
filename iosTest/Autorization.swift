@@ -22,19 +22,11 @@ class Autorization {
     
    
     
-    func jsonFromFile(folder: String, fileName:String) -> [String: Any]? {
-        let textFromFile:String? = WorkWithFile(folder: "Users", fileName: "user\(login)").readTextFromFile()
-        if textFromFile != nil {
-            let jsonData:Any? = textFromFile!.parseJSONString
-            return  jsonData as? [String: Any]
-        }
-        return nil
-    }
-    
+   
     func autorization() -> Promise<Bool>{
         return Promise { fulfill, reject in
             
-            if let parsedJsonData = jsonFromFile(folder: "Users", fileName: "user\(login)"){
+            if let parsedJsonData =  WorkWithFile(folder: "Users", fileName: "user\(login)").jsonFromFile() as? [String:Any]{
                 if (password.sha256() == parsedJsonData["password"] as! String){
                     print("Autorization done")
                     Sources.getSources().user = User(userName: login, userPassword: password.sha256(), favoriteSources: parsedJsonData["sources"] as! [String])

@@ -25,6 +25,14 @@ class WorkWithFile {
         file = writePath.appendingPathComponent(fileName + ".txt")
     }
     
+    func jsonFromFile() -> Any? {
+        let textFromFile:String? = readTextFromFile()
+        if textFromFile != nil {
+            return textFromFile!.parseJSONString
+        }
+        return nil
+    }
+    
     func readTextFromFile () -> String?{
         let text:String?
         if !FileManager.default.fileExists(atPath: writePath.path){
