@@ -9,13 +9,13 @@
 import UIKit
 
 
-class Item {
+struct Item {
     
     var title:String
-    var image:UIImage?
+    var imageUrl:URL
     var description:String
     var newsUrl:String
-    init? (title:String, image:UIImage?, description:String, newsUrl:String	){
+    init? (title:String, imageUrl:URL, description:String, newsUrl:String	){
         
         
         guard !title.isEmpty else {
@@ -26,7 +26,7 @@ class Item {
         }
 
         self.title = title
-        self.image = image
+        self.imageUrl = imageUrl
         self.description = description
         self.newsUrl = newsUrl
     }

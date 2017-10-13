@@ -48,7 +48,6 @@ class Autorization {
         
 
         return Promise { fulfill, reject in
-            print("---REGISTRATION START---")
             let fileWorker = WorkWithFile(folder: "Users", fileName: "user\(login)")
             if fileWorker.fileExists(){
                 
@@ -61,10 +60,10 @@ class Autorization {
                 
                 if fileWorker.writeTextToFile(text: stringJson){
                     fulfill(true)
-                    print("String writed to file \n \(stringJson)\n")
+                    //print("String writed to file \n \(stringJson)\n")
                 }
                 
-                print("---REGISTRATION END---")
+                print("---REGISTRATION DONE---")
             }else{
                 fulfill(false)
             }

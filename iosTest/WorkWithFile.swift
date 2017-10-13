@@ -41,7 +41,7 @@ class WorkWithFile {
         do{
             
             try text = String(contentsOf: file, encoding: .utf8)
-            print ("Read from file \(fileName) success with text:\n\(text!)")
+            //print ("Read from file \(fileName) success with text:\n\(text!)")
         }
         catch{
             text = nil
@@ -69,7 +69,7 @@ class WorkWithFile {
             print("error with file")
             return false
         }
-        print ("Write to file \(fileName) success with text:\n\(text)")
+        //print ("Write to file \(fileName) success with text:\n\(text)")
         return true
     }
 }

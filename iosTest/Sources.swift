@@ -16,21 +16,25 @@ class Source {
     var sourceLink:String!
     var isSelected:Bool = false
     
-    init (sourceName:String!, sourceLink:String!, isSelected:Bool = false){
+    init (sourceName:String!, sourceLink:String!){
         self.sourceName = sourceName
         self.sourceLink = sourceLink
     }
     
     func loadItemsFromSource(limit:Int) -> Promise<[Item]>{
         return Promise{ fulfill, reject in
+            var index = 0
             var items:[Item] = [Item]()
             let sourcesJson = WorkWithFile(folder: "Items", fileName: "items").jsonFromFile() as? [String:Any]
             let unParsedItems = sourcesJson![sourceLink] as! [Any]
             for item in unParsedItems{
-                let unParsedItem = item as! [String:String]
-                let image = downloadImage(imageUrl: unParsedItem["imageUrl"]!)
-                items.append(Item(title: unParsedItem["title"]!, image: image, description: unParsedItem["description"]!, newsUrl: unParsedItem["newsUrl"]!)!)
                 
+                let unParsedItem = item as! [String:String]
+                items.append(Item(title: unParsedItem["title"]!, imageUrl: URL(string: unParsedItem["imageUrl"]!)!, description: unParsedItem["description"]!, newsUrl: unParsedItem["newsUrl"]!)!)
+                index += 1
+                if index == limit{
+                    break
+                }
             }
             fulfill(items)
         }
@@ -38,18 +42,19 @@ class Source {
         
     }
     
-    private func downloadImage(imageUrl:String) -> UIImage?{
-        var img:UIImage?
-        Alamofire.request(URL(string: imageUrl)!).responseImage { (response) in
-     
-            guard let image = response.result.value else {
-                // Handle error
-                return
+    private func downloadImage(imageUrl:String) -> Promise<UIImage?>{
+        return Promise{ fulfill, reject in
+        Alamofire.request(URL(string: imageUrl)!).responseImage { response in
+            print("dasdasdasd")
+            if let image = response.result.value {
+                print("image downloaded: \(image)")
+                fulfill(image)
             }
-            img = image
         }
         
-        return img
+        
+    }
+    
     }
     
 }
@@ -113,20 +118,19 @@ class Sources {
                 },
                 {
                     "title": "Астроному на заметку: экваториальная монтировка своими руками",
-                    "imageUrl": "https://habrastorage.org/getpro/habr/post_images/62c/d3f/b31/62cd3fb315a5f5b12d7de940349edef8.jpg",
+                    "imageUrl": "https://habrastorage.org/getpro/geektimes/post_images/ef0/4b7/abe/ef04b7abedcb1ba0cb98c9e8087e3ad2.jpg",
                     "description": "Несколько лет назад я с женой побывал в научном отпуске. Мы потратили немало времени, колеся по прекрасному американскому Юго-Западу, посетили много замечательных природных парков на плато Колорадо. Проехав сотни километров по безлюдным местам под ясным звёздным небом, я начал мечтать об экваториальной монтировке — платформе для фотокамеры, которая будет вращаться, чтобы компенсировать вращение планеты. При съёмке звёзд со штатива более-менее длинная выдержка приведёт к тому, что звёзды превратятся в световые штрихи. Это любопытный художественный эффект, но он не позволяет астрофотографу запечатлеть тонкие подробности звёздного неба. Мысленно я высчитывал передаточные отношения шестерёнок редуктора для монтировки, пока моя жена спала на соседнем сиденье. Вернувшись из поездки, я начал подбирать инструменты для реализации своей мечты. Создавать экваториальную монтировку я решил из листового акрила, а шестерёнки нарезать лазером. В качестве ПО для проектирования механики и создания чертежей я взял Autodesk Inventor. Ссылки на чертежи:",
                     "newsUrl": "https://geektimes.ru/company/mailru/blog/294249/"
                 }
             ]
         }
         """
-        print(stringJson)
         WorkWithFile(folder: "Items", fileName: "items").writeTextToFile(text: stringJson)
         
     }
 
     private func loadAllSources () -> [Source] {
-            return [Source(sourceName: "Habrahabr", sourceLink: "https://habrahabr.ru", isSelected: false), Source(sourceName: "Geektimes", sourceLink: "https://geektimes.ru", isSelected:false)]
+            return [Source(sourceName: "Habrahabr", sourceLink: "https://habrahabr.ru"), Source(sourceName: "Geektimes", sourceLink: "https://geektimes.ru")]
     }
     
     private func updateFavoritsSources (){
