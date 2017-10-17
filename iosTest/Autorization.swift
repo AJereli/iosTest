@@ -29,8 +29,8 @@ class Autorization {
             if let parsedJsonData =  WorkWithFile(folder: "Users", fileName: "user\(login)").jsonFromFile() as? [String:Any]{
                 if (password.sha256() == parsedJsonData["password"] as! String){
                     print("Autorization done")
-                    Sources.getSources().user = User(userName: login, userPassword: password.sha256(), favoriteSources: parsedJsonData["sources"] as! [String])
-                    Sources.getSources().setAllSelections(sourcesLinks: parsedJsonData["sources"] as! [String])
+                    Sources.getInstance().user = User(userName: login, userPassword: password.sha256(), favoriteSources: parsedJsonData["sources"] as! [String])
+                    Sources.getInstance().setAllSelections(sourcesLinks: parsedJsonData["sources"] as! [String])
                     fulfill(true)
                 }else{
                     fulfill(false)

@@ -21,7 +21,7 @@ class MenuViewCell: UITableViewCell {
     @IBAction func valueChangedEvent(_ sender: Any) {
         let uiSwitch = sender as! UISwitch
         
-        Sources.getSources().setSelection(sourceLink: menuItemLabel.text!, isSelected: uiSwitch.isOn)
+        Sources.getInstance().setSelection(sourceLink: menuItemLabel.text!, isSelected: uiSwitch.isOn)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

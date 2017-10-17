@@ -15,6 +15,7 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var newsImageView: UIImageView!
     
     
+    @IBOutlet weak var imageSpinner: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

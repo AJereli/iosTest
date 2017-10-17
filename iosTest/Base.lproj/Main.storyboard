@@ -47,6 +47,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8GM-sI-Md4">
+                                                    <rect key="frame" x="52" y="50" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
@@ -60,6 +64,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descritpionTextView" destination="5aO-Sj-cvf" id="9t3-0Q-XQg"/>
+                                    <outlet property="imageSpinner" destination="8GM-sI-Md4" id="df2-oT-Fl9"/>
                                     <outlet property="newsImageView" destination="nT0-9i-Uby" id="NXP-9G-7sq"/>
                                     <outlet property="titleLabel" destination="0cv-Iv-SRk" id="UmC-mn-JIg"/>
                                 </connections>
@@ -79,6 +84,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="n5t-9u-kUu">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="segueUrl" id="se2-qs-e8H"/>
                     </connections>

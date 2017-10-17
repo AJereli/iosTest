@@ -8,7 +8,7 @@
     
     import UIKit
     import PromiseKit
-    
+
     class ItemsUITableViewController: UITableViewController {
         
         var items = [Item]()
@@ -25,7 +25,7 @@
             super.viewDidLoad()
             tableView.clearsContextBeforeDrawing = true
             
-            
+            self.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
             
             // Uncomment the following line to preserve selection between presentations
             // self.clearsSelectionOnViewWillAppear = false
@@ -33,13 +33,33 @@
             // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
             // self.navigationItem.rightBarButtonItem = self.editButtonItem
         }
-        
+        @objc func handleRefresh(refreshControl: UIRefreshControl) {
+           
+            
+            items = Sources.getInstance().loadItems(limitForSource: 1)
+            self.tableView.reloadData()
+            refreshControl.endRefreshing()
+        }
         
         override func viewWillAppear(_ animated: Bool) {
-            items += getItems(limit:3)
+            items = Sources.getInstance().loadItems(limitForSource: 3)
+    
             tableView.reloadData()
         }
         
+        override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            // calculates where the user is in the y-axis
+            let offsetY = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            
+            if offsetY > contentHeight - scrollView.frame.size.height {
+                
+                items = Sources.getInstance().loadItems(limitForSource: 1)
+                
+                // tell the table view to reload with the new data
+                tableView.reloadData()
+            }
+        }
         
         @IBAction func selectMenuEvent(_ sender: Any) {
             performSegue(withIdentifier: "segueMenu", sender: sender)
@@ -59,21 +79,25 @@
             
             cell.titleLabel.text = item.title
             cell.descritpionTextView.text =  item.description
-            cell.newsImageView.af_setImage(withURL: item.imageUrl)
+            
+            cell.imageSpinner.startAnimating()
+
+            firstly{ () -> Promise<UIImage> in
+                return item.downloadImage()
+                }.then{ (image) -> Void in
+                    cell.newsImageView.image = image
+                }.catch{error in
+                    cell.newsImageView.image = UIImage(named: "animeCat")
+            }.always {
+                
+                    cell.imageSpinner.stopAnimating()
+            }
+            
+         
             return cell
         }
         
-        
-        
-        private func getItems(limit:Int) -> [Item]{
-            items = [Item]()
-            var loadedItems = [Item]()
-            for i in 0..<Sources.getSources().favoritsSources.count{
-                loadedItems += Sources.getSources().favoritsSources[i].loadItemsFromSource(limit: limit).value!
-            }
-            return loadedItems
-        }
-        
+      
         
         
         
@@ -102,6 +126,15 @@
                 
             }
         }
+        
+      
+        
+//        override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//            if indexPath.row == items.count-1 {
+//                tableView.reloadData()
+//            }
+//        }
+
         
         /*
          // Override to support conditional editing of the table view.
