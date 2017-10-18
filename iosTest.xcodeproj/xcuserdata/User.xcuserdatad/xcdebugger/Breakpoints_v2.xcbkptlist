@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosTest/MenuViewCell.swift"
-            timestampString = "529897629.388988"
+            timestampString = "529981681.257422"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "valueChangedEvent(_:)"
+            landmarkName = "switchChangedEvent(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

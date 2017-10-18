@@ -16,11 +16,55 @@ class AutorizationUIViwController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+        adjustingHeight(show: true, notification: notification)
+
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification) {
+        adjustingHeight(show: false, notification: notification)
+
+    }
+    func adjustingHeight(show:Bool, notification:NSNotification) {
+        let info : NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
+        
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+      
+        if (!aRect.contains(contentView!.frame.origin))
+            {
+                self.scrollView.scrollRectToVisible(contentView!.frame, animated: true)
+            }
+        
+    }
+    var activeField: UITextField?
+
+    func textFieldDidBeginEditing(textField: UITextField!)
+    {
+        activeField = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField!)
+    {
+        activeField = nil
     }
     private func startItemsView (){
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

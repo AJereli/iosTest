@@ -8,10 +8,11 @@
     
     import UIKit
     import PromiseKit
-
+    
     class ItemsUITableViewController: UITableViewController {
         
         var items = [Item]()
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         
         
         override func didReceiveMemoryWarning() {
@@ -34,32 +35,50 @@
             // self.navigationItem.rightBarButtonItem = self.editButtonItem
         }
         @objc func handleRefresh(refreshControl: UIRefreshControl) {
-           
             
-            items = Sources.getInstance().loadItems(limitForSource: 1)
-            self.tableView.reloadData()
+            
+            let newItems = SourcesManager.getInstance().loadItems(limitForSource: 1)
+            items = newItems
+            tableView.reloadData()
+            
             refreshControl.endRefreshing()
         }
         
         override func viewWillAppear(_ animated: Bool) {
-            items = Sources.getInstance().loadItems(limitForSource: 3)
-    
+            let newItems = SourcesManager.getInstance().loadItems(limitForSource: 3)
+            items = newItems
             tableView.reloadData()
-        }
-        
-        override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            // calculates where the user is in the y-axis
-            let offsetY = scrollView.contentOffset.y
-            let contentHeight = scrollView.contentSize.height
             
-            if offsetY > contentHeight - scrollView.frame.size.height {
-                
-                items = Sources.getInstance().loadItems(limitForSource: 1)
-                
-                // tell the table view to reload with the new data
-                tableView.reloadData()
-            }
         }
+//        override open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//            if indexPath.row == items.count-1 {
+//
+//                tableView.reloadData()
+//            }
+//        }
+//        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//            return self.cellHeight;
+//        }
+//        let cellBuffer: CGFloat = 2
+//        let cellHeight: CGFloat = 120
+//        override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//            let bottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+//            let buffer: CGFloat = self.cellBuffer * self.cellHeight
+//            let scrollPosition = scrollView.contentOffset.y
+//
+//            // Reached the bottom of the list
+//            if scrollPosition > bottom - buffer {
+//
+//                let oldCnt:Int = items.count
+//                items = SourcesManager.getInstance().loadItems(limitForSource: 3)
+//
+//                self.tableView.reloadData()
+//                self.tableView.contentOffset.y -= CGFloat(items.count - oldCnt) * self.cellHeight
+//            }
+//
+//        }
+        
+       
         
         @IBAction func selectMenuEvent(_ sender: Any) {
             performSegue(withIdentifier: "segueMenu", sender: sender)
@@ -81,23 +100,23 @@
             cell.descritpionTextView.text =  item.description
             
             cell.imageSpinner.startAnimating()
-
+            
             firstly{ () -> Promise<UIImage> in
                 return item.downloadImage()
                 }.then{ (image) -> Void in
                     cell.newsImageView.image = image
                 }.catch{error in
                     cell.newsImageView.image = UIImage(named: "animeCat")
-            }.always {
-                
+                }.always {
+                    
                     cell.imageSpinner.stopAnimating()
             }
             
-         
+            
             return cell
         }
         
-      
+        
         
         
         
@@ -127,14 +146,14 @@
             }
         }
         
-      
         
-//        override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//            if indexPath.row == items.count-1 {
-//                tableView.reloadData()
-//            }
-//        }
-
+        
+        //        override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //            if indexPath.row == items.count-1 {
+        //                tableView.reloadData()
+        //            }
+        //        }
+        
         
         /*
          // Override to support conditional editing of the table view.
@@ -158,7 +177,7 @@
         
         
         // Override to support rearranging the table view.
-       
+        
         
         /*
          // Override to support conditional rearranging of the table view.

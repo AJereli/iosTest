@@ -38,16 +38,20 @@ class Item {
     
     func downloadImage () -> Promise<UIImage>{
         return Promise{ fulfill, reject in
+            if (image != nil) {
+                fulfill(image!)
+            }else{
             Alamofire.request(imageUrl).validate().responseImage { response in
                 switch response.result{
                 case .success(let value):
                     if let image:UIImage = value {
-                        print("image downloaded: \(image)")
                         fulfill(image)
                     }
                 case .failure(let error):
                     print(error)
                     reject(error)
+                }
+                
                 }
                 
             }

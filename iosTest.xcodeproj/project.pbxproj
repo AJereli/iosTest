@@ -13,7 +13,7 @@
 		CE222C6F1F85AAEB002A2492 /* WorkWithFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE222C6E1F85AAEB002A2492 /* WorkWithFile.swift */; };
 		CE2CAE571F7EED6600902C5C /* ManuUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2CAE561F7EED6600902C5C /* ManuUIViewController.swift */; };
 		CE2CAE591F7EF5C900902C5C /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2CAE581F7EF5C900902C5C /* MenuViewCell.swift */; };
-		CE2CAE5D1F7F173000902C5C /* Sources.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2CAE5C1F7F173000902C5C /* Sources.swift */; };
+		CE2CAE5D1F7F173000902C5C /* SourcesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2CAE5C1F7F173000902C5C /* SourcesManager.swift */; };
 		CE573CC81F7A602500D809E7 /* ItemsUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573CC71F7A602500D809E7 /* ItemsUITableViewController.swift */; };
 		CE573CCA1F7A618900D809E7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573CC91F7A618900D809E7 /* Item.swift */; };
 		CE6CD6041F792A6300B5150C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CD6031F792A6300B5150C /* AppDelegate.swift */; };
@@ -57,7 +57,7 @@
 		CE222C6E1F85AAEB002A2492 /* WorkWithFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkWithFile.swift; sourceTree = "<group>"; };
 		CE2CAE561F7EED6600902C5C /* ManuUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManuUIViewController.swift; sourceTree = "<group>"; };
 		CE2CAE581F7EF5C900902C5C /* MenuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
-		CE2CAE5C1F7F173000902C5C /* Sources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources.swift; sourceTree = "<group>"; };
+		CE2CAE5C1F7F173000902C5C /* SourcesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesManager.swift; sourceTree = "<group>"; };
 		CE573CC71F7A602500D809E7 /* ItemsUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsUITableViewController.swift; sourceTree = "<group>"; };
 		CE573CC91F7A618900D809E7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		CE6CD6001F792A6300B5150C /* iosTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +161,7 @@
 				CE813F3D1F831246004B0694 /* AutorizationUIViwController.swift */,
 				CE2CAE561F7EED6600902C5C /* ManuUIViewController.swift */,
 				CE2CAE581F7EF5C900902C5C /* MenuViewCell.swift */,
-				CE2CAE5C1F7F173000902C5C /* Sources.swift */,
+				CE2CAE5C1F7F173000902C5C /* SourcesManager.swift */,
 				CE573CC71F7A602500D809E7 /* ItemsUITableViewController.swift */,
 				CE573CC91F7A618900D809E7 /* Item.swift */,
 				CEED0A471F7954300021B678 /* ItemTableViewCell.swift */,
@@ -507,7 +507,7 @@
 				CE813F3E1F831246004B0694 /* AutorizationUIViwController.swift in Sources */,
 				CEED0A481F7954300021B678 /* ItemTableViewCell.swift in Sources */,
 				CE813F361F830534004B0694 /* Autorization.swift in Sources */,
-				CE2CAE5D1F7F173000902C5C /* Sources.swift in Sources */,
+				CE2CAE5D1F7F173000902C5C /* SourcesManager.swift in Sources */,
 				CE222C6F1F85AAEB002A2492 /* WorkWithFile.swift in Sources */,
 				CE2CAE571F7EED6600902C5C /* ManuUIViewController.swift in Sources */,
 				CE6CD6061F792A6300B5150C /* PageViewController.swift in Sources */,

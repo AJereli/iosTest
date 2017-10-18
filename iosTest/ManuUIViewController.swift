@@ -28,7 +28,7 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Sources.getInstance().allSources.count
+        return SourcesManager.getInstance().allSources.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -37,7 +37,7 @@ class ManuUIViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MenuViewCell  else {
             fatalError("The dequeued cell is not an instance of MenuTableViewCell.")
         }
-        let menuItem = Sources.getInstance().allSources[indexPath.row]
+        let menuItem = SourcesManager.getInstance().allSources[indexPath.row]
 
         
         cell.menuItemLabel.text = menuItem.sourceLink
