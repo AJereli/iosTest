@@ -41,17 +41,17 @@ class Item {
             if (image != nil) {
                 fulfill(image!)
             }else{
-            Alamofire.request(imageUrl).validate().responseImage { response in
-                switch response.result{
-                case .success(let value):
-                    if let image:UIImage = value {
-                        fulfill(image)
+                Alamofire.request(imageUrl).validate().responseImage { response in
+                    switch response.result{
+                    case .success(let value):
+                        
+                        fulfill(value as UIImage)
+                        
+                    case .failure(let error):
+                        print(error)
+                        reject(error)
                     }
-                case .failure(let error):
-                    print(error)
-                    reject(error)
-                }
-                
+                    
                 }
                 
             }

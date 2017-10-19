@@ -17,17 +17,23 @@
         
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
+            
             // Dispose of any resources that can be recreated.
         }
         
         //MARK: - Table view data source
-        
+
         override func viewDidLoad() {
             super.viewDidLoad()
             tableView.clearsContextBeforeDrawing = true
             
             self.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
             
+            
+            spinner.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
+            tableView.tableFooterView = spinner;
+           
+
             // Uncomment the following line to preserve selection between presentations
             // self.clearsSelectionOnViewWillAppear = false
             
@@ -50,6 +56,30 @@
             tableView.reloadData()
             
         }
+        
+        let daysToAdd = 30
+        let cellBuffer: CGFloat = 2
+        
+        
+        
+        override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            let top: CGFloat = 0
+            let bottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+            let buffer: CGFloat = self.cellBuffer * 120
+            let scrollPosition = scrollView.contentOffset.y
+            
+            // Reached the bottom of the list
+            if scrollPosition > bottom - buffer {
+                spinner.startAnimating()
+                
+                // CALL SOURCE MANAGER
+                
+                spinner.stopAnimating()
+
+                self.tableView.reloadData()
+            }
+        }
+        
 //        override open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //            if indexPath.row == items.count-1 {
 //

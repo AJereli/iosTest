@@ -46,7 +46,6 @@ class Source {
             let sourcesJson = WorkWithFile(folder: "Items", fileName: "items").jsonFromFile() as? [String:Any]
             let unParsedItems = sourcesJson![sourceLink] as! [[String:String]]
             var cnt = 0
-            var newItems:[Item] = [Item]()
             if checkForNewItems() {
                 for item in unParsedItems{
                     let id = Int(item["id"]!)!
@@ -77,7 +76,6 @@ class Source {
         let sourcesJson = WorkWithFile(folder: "Items", fileName: "items").jsonFromFile() as? [String:Any]
         let unParsedItems = sourcesJson![sourceLink] as! [[String:String]]
         var cnt = 0
-        var newItems:[Item] = [Item]()
         if checkForNewItems() {
             for item in unParsedItems{
                 let id = Int(item["id"]!)!

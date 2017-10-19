@@ -18,54 +18,81 @@ class AutorizationUIViwController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    
+    @IBOutlet weak var heightConstrain: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(AutorizationUIViwController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AutorizationUIViwController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    @objc func keyboardWillShow(notification:NSNotification) {
-        adjustingHeight(show: true, notification: notification)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+   
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        NotificationCenter.default.removeObserver(self)
 
     }
-    
-    @objc func keyboardWillHide(notification:NSNotification) {
-        adjustingHeight(show: false, notification: notification)
-
-    }
-    func adjustingHeight(show:Bool, notification:NSNotification) {
-        let info : NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
-        
-        self.scrollView.contentInset = contentInsets
-        self.scrollView.scrollIndicatorInsets = contentInsets
-        
-        var aRect : CGRect = self.view.frame
-        aRect.size.height -= keyboardSize!.height
-      
-        if (!aRect.contains(contentView!.frame.origin))
-            {
-                self.scrollView.scrollRectToVisible(contentView!.frame, animated: true)
+    var actualKbHeight:CGFloat = 0.0
+    var kbShow:Bool = false
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if (kbShow){
+            return
+        }
+        kbShow = true
+        if let userInfo = notification.userInfo {
+            if let keyboardSize =  (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                if actualKbHeight == 0.0{
+                    actualKbHeight = keyboardSize.height
+                }
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.heightConstrain.constant -= self.actualKbHeight
+                })
             }
-        
-    }
-    var activeField: UITextField?
-
-    func textFieldDidBeginEditing(textField: UITextField!)
-    {
-        activeField = textField
+        }
     }
     
-    func textFieldDidEndEditing(textField: UITextField!)
-    {
-        activeField = nil
+    @objc func keyboardWillHide(_ notification: Notification){
+        kbShow = false
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.heightConstrain.constant += self.actualKbHeight
+        })
+        
+        
+        
+        
     }
+    var  _currentKeyboardHeight:CGFloat = 0.0;
+
+    
+    func adjustingHeight(show:Bool, notification:Notification) {
+        if let userInfo = notification.userInfo {
+            
+                if let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+                    let keyboardRectangle = keyboardFrame.cgRectValue
+                    let kbHeight = keyboardRectangle.height
+                    let offSet = show ? -(kbHeight - _currentKeyboardHeight) : kbHeight - _currentKeyboardHeight
+                    print(offSet)
+                    //contentView.frame.origin.y += offSet
+                    if show {
+                        _currentKeyboardHeight = kbHeight
+                    }else{
+                        _currentKeyboardHeight = 0.0
+                    }
+                 
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.contentView.frame.origin.y += offSet
+                    })
+                }
+                
+            
+        }
+    }
+
     private func startItemsView (){
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = mainStoryboard.instantiateViewController(withIdentifier: "navigationController") as! UINavigationController
