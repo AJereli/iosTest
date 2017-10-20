@@ -11,9 +11,11 @@
     
     class ItemsUITableViewController: UITableViewController {
         
-        var items = [Item]()
         let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         
+        var items = [Item]()
+        var isDownloading:Bool = false
+
         
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
@@ -57,58 +59,32 @@
             
         }
         
-        let daysToAdd = 30
-        let cellBuffer: CGFloat = 2
+       
         
         
         
         override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            let top: CGFloat = 0
-            let bottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
-            let buffer: CGFloat = self.cellBuffer * 120
-            let scrollPosition = scrollView.contentOffset.y
             
-            // Reached the bottom of the list
-            if scrollPosition > bottom - buffer {
-                spinner.startAnimating()
-                
-                // CALL SOURCE MANAGER
-                
-                spinner.stopAnimating()
+            
+            let deltaOffset = (scrollView.contentSize.height - scrollView.frame.size.height) - scrollView.contentOffset.y
 
-                self.tableView.reloadData()
+            if deltaOffset <= 0 && !isDownloading {
+                isDownloading = true
+                SourcesManager.getInstance().loadItemsWithPromise(limitForSource: 1).then{
+                    (items) -> Void in
+                    self.spinner.startAnimating()
+                    if (self.items.count < items.count){
+                        self.items = items
+                        self.tableView.reloadData()
+                    }
+                    }.always {
+                        self.spinner.stopAnimating()
+                        self.isDownloading = false
+                }
+                
             }
         }
         
-//        override open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//            if indexPath.row == items.count-1 {
-//
-//                tableView.reloadData()
-//            }
-//        }
-//        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//            return self.cellHeight;
-//        }
-//        let cellBuffer: CGFloat = 2
-//        let cellHeight: CGFloat = 120
-//        override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//            let bottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
-//            let buffer: CGFloat = self.cellBuffer * self.cellHeight
-//            let scrollPosition = scrollView.contentOffset.y
-//
-//            // Reached the bottom of the list
-//            if scrollPosition > bottom - buffer {
-//
-//                let oldCnt:Int = items.count
-//                items = SourcesManager.getInstance().loadItems(limitForSource: 3)
-//
-//                self.tableView.reloadData()
-//                self.tableView.contentOffset.y -= CGFloat(items.count - oldCnt) * self.cellHeight
-//            }
-//
-//        }
-        
-       
         
         @IBAction func selectMenuEvent(_ sender: Any) {
             performSegue(withIdentifier: "segueMenu", sender: sender)
@@ -128,7 +104,6 @@
             
             cell.titleLabel.text = item.title
             cell.descritpionTextView.text =  item.description
-            
             cell.imageSpinner.startAnimating()
             
             firstly{ () -> Promise<UIImage> in

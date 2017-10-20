@@ -21,13 +21,6 @@ class Item {
     var newsUrl:String
     init? (id:Int, title:String, imageUrl:URL, description:String, newsUrl:String	){
         
-        
-        guard !title.isEmpty else {
-            return nil
-        }
-        guard !description.isEmpty else{
-            return nil
-        }
         self.id = id
         self.title = title
         self.imageUrl = imageUrl

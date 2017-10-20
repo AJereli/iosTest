@@ -12,8 +12,8 @@ import Alamofire
 import AlamofireImage
 
 class Source {
-    var sourceName:String!
-    var sourceLink:String!
+    let sourceName:String!
+    let sourceLink:String!
     var isSelected:Bool = false
     var items:[Item] = [Item]()
     var currLoadCnt:Int = 0
@@ -134,7 +134,7 @@ class SourcesManager {
         
     }
     
-    func loadItemsAsync (limitForSource:Int) -> Promise<[Item]>{
+    func loadItemsWithPromise (limitForSource:Int) -> Promise<[Item]>{
         return Promise { fulfill, reject in
             var items:[Item] = [Item]()
             
@@ -152,8 +152,6 @@ class SourcesManager {
                 { (source:Source) -> Bool in
                 source.sourceLink == s
             })?.isSelected = isSelected
-            
-          
         }
         
         updateFavoritsSources()
@@ -189,9 +187,7 @@ class SourcesManager {
         }
         """
         
-        if WorkWithFile(folder: "Users", fileName: "user" + user!.userName).writeTextToFile(text: stringJson){
-            //print("(UPDATE Favors)\n String writed to file \n \(stringJson)\n")
-        }
+        WorkWithFile(folder: "Users", fileName: "user" + user!.userName).writeTextToFile(text: stringJson)
         
     }
     private func createMockItems (){

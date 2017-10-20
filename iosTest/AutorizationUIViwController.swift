@@ -57,40 +57,9 @@ class AutorizationUIViwController: UIViewController {
     
     @objc func keyboardWillHide(_ notification: Notification){
         kbShow = false
-        
         UIView.animate(withDuration: 0.3, animations: {
             self.heightConstrain.constant += self.actualKbHeight
         })
-        
-        
-        
-        
-    }
-    var  _currentKeyboardHeight:CGFloat = 0.0;
-
-    
-    func adjustingHeight(show:Bool, notification:Notification) {
-        if let userInfo = notification.userInfo {
-            
-                if let keyboardFrame: NSValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-                    let keyboardRectangle = keyboardFrame.cgRectValue
-                    let kbHeight = keyboardRectangle.height
-                    let offSet = show ? -(kbHeight - _currentKeyboardHeight) : kbHeight - _currentKeyboardHeight
-                    print(offSet)
-                    //contentView.frame.origin.y += offSet
-                    if show {
-                        _currentKeyboardHeight = kbHeight
-                    }else{
-                        _currentKeyboardHeight = 0.0
-                    }
-                 
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.contentView.frame.origin.y += offSet
-                    })
-                }
-                
-            
-        }
     }
 
     private func startItemsView (){

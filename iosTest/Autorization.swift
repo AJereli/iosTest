@@ -60,10 +60,7 @@ class Autorization {
                 
                 if fileWorker.writeTextToFile(text: stringJson){
                     fulfill(true)
-                    //print("String writed to file \n \(stringJson)\n")
                 }
-                
-                print("---REGISTRATION DONE---")
             }else{
                 fulfill(false)
             }

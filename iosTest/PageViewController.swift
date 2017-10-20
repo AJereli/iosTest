@@ -9,21 +9,27 @@
 import UIKit
 import WebKit
 class PageViewController: UIViewController, WKUIDelegate {
-    var webView: WKWebView!
+    private var webView: WKWebView!
     
-    var siteUrl:String = "https://www.apple.com"
+    var siteUrl:String?
     
-    
-    @IBOutlet weak var testTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let swiperight: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
+        swiperight.direction = .right
         
-        let url = URL(string: siteUrl)
+        self.view!.addGestureRecognizer(swiperight)
+        
+        let url = URL(string: siteUrl!)
         let myRequest = URLRequest(url: url!)
         webView.load(myRequest)
     }
     
-    
+    @objc private func swipeRight(gestureRecognizer: UISwipeGestureRecognizer) {
+        let autorizationUIViwController: AutorizationUIViwController = AutorizationUIViwController(nibName: nil, bundle: nil)
+        self.navigationController?.pushViewController(autorizationUIViwController, animated: true)
+        
+    }
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
@@ -35,10 +41,7 @@ class PageViewController: UIViewController, WKUIDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func textFieldTDTest(_ sender: Any) {
-        (sender as! UITextField).text?.append("t")
-        
-    }
+    
     
 }
 
